@@ -1,0 +1,71 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+#define N 11
+
+typedef struct Node{
+    int v;
+    struct Node *next;
+} Node;
+
+Node *List[N+1];
+
+//Tao Node
+Node *createNode(int x){
+    Node *p = (Node*)malloc(sizeof(Node));
+    p->v = x;
+    p->next = NULL;
+    return p;
+}
+
+//Khoi tao danh sach
+void createList(){
+    for (int i=1; i <= N; i++){
+        List[i] = NULL;
+    }
+}
+
+//Them canh
+void addEdges(int i, int j){
+    Node *p = createNode(j);
+    p->next = List[i];
+    List[i] = p;
+
+    p = createNode(i);
+    p->next = List[j];
+    List[j] = p;
+}
+
+//In ra List
+void printList() {
+    printf("List:\n");
+    for(int i=1; i <= N; i++) {
+        printf("%d: ", i);
+        Node *p = List[i];
+        while(p != NULL) {
+            printf("%d -> ", p->v);
+            p = p->next;
+        }
+        printf("NULL\n");
+    }
+}
+
+int main(){
+    createList;
+    addEdges(1,2);
+    addEdges(1,6);
+    addEdges(1,7);
+    addEdges(1,8);
+    addEdges(1,9);
+    addEdges(1,10);
+    addEdges(2,3);
+    addEdges(2,11);
+    addEdges(3,4);
+    addEdges(4,5);
+    addEdges(4,6);
+    addEdges(5,6);
+    addEdges(10,11);
+
+    printList();
+    return 0;
+}
